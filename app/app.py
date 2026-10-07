@@ -178,6 +178,10 @@ input {
     padding: 40px 0 10px 0;
     font-size: 0.85rem;
 }
+/* Hide Streamlit top header */
+header[data-testid="stHeader"] {
+    display: none;
+}
 
 </style>
 """, unsafe_allow_html=True)
@@ -513,8 +517,8 @@ if run_analysis:
     )
 
     comparison = pd.DataFrame({
-        "Campaign": ["Your Campaign", "Optimized Configuration"],
-        "Predicted Conversion Rate": [
+        "Campaign": ["Current Campaign", "Optimized Campaign"],
+        "Predicted Conversion Rate (%)": [
             prediction_percent,
             optimized_percent
         ]
@@ -522,6 +526,7 @@ if run_analysis:
 
     st.bar_chart(
         comparison.set_index("Campaign"),
+        y="Predicted Conversion Rate (%)",
         width="stretch"
     )
 
